@@ -6,7 +6,7 @@ interface Pokemon {
 }
 
 interface Pokemons {
-  pokemons: Pokemon[];
+  results: Pokemon[];
 }
 
 const usePostStarshipService = () => {

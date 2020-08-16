@@ -16,7 +16,7 @@ const PokemonDisplay: React.FC = () => {
       <Navbar text="Pokemon" />
       {service.status === 'loading' && <div>Loading...</div>}
       {service.status === 'loaded' &&
-        service.payload.pokemons.map((item, index) => (
+        service.payload.results.map((item, index) => (
           // eslint-disable-next-line react/no-array-index-key
           <li key={index}>
             <span>{item.name}</span>
