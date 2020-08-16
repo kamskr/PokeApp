@@ -23,9 +23,15 @@ const StyledInfoContainer = styled.div`
   margin-right: auto;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: left;
+  h2 {
+    margin: 5px;
+    font-size: ${({ theme }) => theme.fontSize.l};
+    color: ${({ theme }) => theme.color.darkGrey};
+  }
   span {
     margin: 5px;
+    color: ${({ theme }) => theme.color.grey};
   }
 `;
 
@@ -41,31 +47,25 @@ const PokemonDisplay: React.FunctionComponent<PokemonDisplayProps> = ({
   elements,
 }: PokemonDisplayProps) => {
   return (
-    <>
-      <StyledContainer>
-        <StyledContainerInner>
-          <img src={imageSource} alt="PokemonFront" />
-          <StyledInfoContainer>
-            <span>{name}</span>
-            <span>001</span>
-          </StyledInfoContainer>
-          {elements.map((item) => (
-            <>
-              <img
-                // eslint-disable-next-line global-require
-                // eslint-disable-next-line import/no-dynamic-require
-                src={require(`../../assets/types/small/${item}.svg`)}
-                alt="element"
-              />
-            </>
-          ))}
-        </StyledContainerInner>
-      </StyledContainer>
-    </>
+    <StyledContainer>
+      <StyledContainerInner>
+        <img src={imageSource} alt="PokemonFront" />
+        <StyledInfoContainer>
+          <h2>{name}</h2>
+          <span>#001</span>
+        </StyledInfoContainer>
+        {elements.map((item) => (
+          <>
+            <img
+              // eslint-disable-next-line global-require
+              // eslint-disable-next-line import/no-dynamic-require
+              src={require(`../../assets/types/small/${item}.svg`)}
+              alt="element"
+            />
+          </>
+        ))}
+      </StyledContainerInner>
+    </StyledContainer>
   );
 };
 export default PokemonDisplay;
-
-//             return (
-//               <img src="../../assets/types/small/electric.svg" alt="element" />
-//             );

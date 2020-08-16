@@ -3,6 +3,7 @@ import { ThemeProvider } from 'styled-components';
 import GlobalStyle from './theme/GlobalStyle';
 import theme from './theme/mainTheme';
 import PokemonDisplay from './components/molecules/PokemonDisplay';
+import PokemonList from './views/PokemonList';
 
 const App: React.FunctionComponent = () => {
   return (
@@ -15,6 +16,7 @@ const App: React.FunctionComponent = () => {
             name="Pikatchu"
             elements={['electric']}
           />
+          <PokemonList />
         </>
       </ThemeProvider>
     </div>

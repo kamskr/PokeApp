@@ -3,6 +3,7 @@ const theme = {
     s: '1.2rem',
     m: '2.1rem',
     l: '2.4rem',
+    xl: '2.8rem',
   },
   color: {
     white: '#FFFFFF',
