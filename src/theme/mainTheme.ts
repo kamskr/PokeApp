@@ -5,6 +5,11 @@ const theme = {
     l: '2.4rem',
   },
   color: {
+    white: '#FFFFFF',
+    grey: '#A4A4A4',
+    lightGrey: '#E3E3E3',
+    darkGrey: '#4F4F4F',
+    black: '#000000',
     bug: '#9DC130',
     dark: '#5F606D',
     dragon: '#0773C7',
