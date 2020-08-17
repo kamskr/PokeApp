@@ -33,6 +33,10 @@ const theme = {
     gradient2: '#6FDEFA',
     gradient3: '#8DE061',
     gradient4: '#51E85E',
+    gradient1light: 'rgba(109, 148, 253, 0.4)',
+    gradient2light: 'rgba(112, 222, 250, 0.4)',
+    gradient3light: 'rgba(142, 224, 97, 0.4)',
+    gradient4light: 'rgba(79, 232, 92, 0.4)',
   },
 };
 
