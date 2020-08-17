@@ -18,12 +18,14 @@ const StyledStatName = styled.span`
   color: ${({ theme }) => theme.color[pokemonColor]};
   font-size: ${({ theme }) => theme.fontSize.m};
   margin-right: 10px;
+  width: 80px;
 `;
 
 const StyledEffort = styled.span`
   color: ${({ theme }) => theme.color.grey};
   font-size: ${({ theme }) => theme.fontSize.m};
   margin-right: 10px;
+  width: 60px;
 `;
 
 const StyledSlider = styled.div`
@@ -49,7 +51,7 @@ interface StatProps {
 const StyledSliderActive = styled.div<StatProps>`
   position: absolute;
   left: 0;
-  right: ${({ baseStat }) => `${100 - baseStat}%`};
+  right: ${({ baseStat }) => `${100 - baseStat / 1.3}%`};
   background-color: ${({ theme }) => theme.color[pokemonColor]};
   border-radius: 20px;
   height: 10px;

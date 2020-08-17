@@ -11,6 +11,21 @@ const StyledContainer = styled.div`
   display: flex;
   width: 100%;
   padding-left: 20px;
+
+  .singlePokemon-enter {
+    transform: translate3d(0, 100%, 0);
+  }
+  .singlePokemon-enter.singlePokemon-enter-active {
+    transform: translate3d(0, 0, 0);
+    transition: all 300ms;
+  }
+  .singlePokemon-exit {
+    transform: translate3d(0, 0, 0);
+  }
+  .singlePokemon-exit.playlistSlide-exit-active {
+    transform: translate3d(0, 100%, 0);
+    transition: all 300ms;
+  }
 `;
 
 const StyledContainerInner = styled.button`
@@ -44,7 +59,7 @@ const StyledInfoContainer = styled.div`
 
 const PokemonDisplay: React.FC<PokemonId> = (id: PokemonId) => {
   const service = useSinglePokemonService(id);
-  const [singleOpen, setSingleOpen] = useState(true);
+  const [singleOpen, setSingleOpen] = useState(false);
 
   const onPokemonOpen = () => {
     setSingleOpen(true);

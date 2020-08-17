@@ -16,12 +16,24 @@ const StyledContainer = styled.div<Props>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  top: 0;
+  top: 100vh;
   left: 0;
   width: 100vw;
   height: 100vh;
   z-index: 9999;
   background-color: ${({ theme, pokemonColor }) => theme.color[pokemonColor]};
+  animation-name: slideup;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+  @keyframes slideup {
+    0% {
+      top: 100vh;
+    }
+    100% {
+      top: 0;
+    }
+  }
 `;
 
 const StyledContainerInner = styled.div`
@@ -37,7 +49,9 @@ const StyledContainerInner = styled.div`
   border-top-right-radius: 60px;
 `;
 
-const StyledContainerStats = styled.div``;
+const StyledContainerStats = styled.div`
+  margin-top: 100px;
+`;
 
 const StyledImage = styled.img`
   width: 50vw;
@@ -59,11 +73,11 @@ const StyledButtonIcon = styled(ButtonIcon)`
 `;
 
 const statShortName = {
-  HP: 'hp',
+  HPP: 'hp',
   ATK: 'attack',
   DEF: 'defense',
-  SATK: 'special-attack',
-  SDEF: 'special-defense',
+  SAK: 'special-attack',
+  SDF: 'special-defense',
   SPD: 'speed',
 };
 
@@ -77,11 +91,11 @@ const SinglePokemon: React.FC<Pokemon> = ({
   function getKeyByValue(
     object: {
       [x: string]: unknown;
-      HP?: string;
+      HPP?: string;
       ATK?: string;
       DEF?: string;
-      SATK?: string;
-      SDEF?: string;
+      SAK?: string;
+      SDF?: string;
       SPD?: string;
     },
     value: string
