@@ -9,9 +9,7 @@ const App: React.FC = () => {
     <div className="App">
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-        <>
-          <PokemonList />
-        </>
+        <PokemonList />
       </ThemeProvider>
     </div>
   );
