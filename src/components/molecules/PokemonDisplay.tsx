@@ -1,6 +1,9 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable global-require */
 import React from 'react';
 import styled from 'styled-components';
+import useSinglePokemonService from '../../hooks/useSinglePokemonService';
+import { PokemonId } from '../../types/PokemonId';
 
 const StyledContainer = styled.div`
   display: flex;
@@ -35,36 +38,36 @@ const StyledInfoContainer = styled.div`
   }
 `;
 
-interface PokemonDisplayProps {
-  imageSource: string;
-  name: string;
-  elements: Array<string>;
-}
-
-const PokemonDisplay: React.FunctionComponent<PokemonDisplayProps> = ({
-  imageSource,
-  name,
-  elements,
-}: PokemonDisplayProps) => {
+const PokemonDisplay: React.FC<PokemonId> = (id: PokemonId) => {
+  const service = useSinglePokemonService(id);
   return (
     <StyledContainer>
-      <StyledContainerInner>
-        <img src={imageSource} alt="PokemonFront" />
-        <StyledInfoContainer>
-          <h2>{name}</h2>
-          <span>#001</span>
-        </StyledInfoContainer>
-        {elements.map((item) => (
-          <>
+      {service.status === 'loading' && <div>Loading...</div>}
+      {
+        // eslint-disable-next-line no-console
+        service.status === 'loaded' && (
+          <StyledContainerInner>
             <img
-              // eslint-disable-next-line global-require
-              // eslint-disable-next-line import/no-dynamic-require
-              src={require(`../../assets/types/small/${item}.svg`)}
-              alt="element"
+              src={service.payload.sprites.front_default}
+              alt="PokemonFront"
             />
-          </>
-        ))}
-      </StyledContainerInner>
+            <StyledInfoContainer>
+              <h2>{service.payload.name}</h2>
+              <span>#{id.id}</span>
+            </StyledInfoContainer>
+            {service.payload.types.map((type) => (
+              <>
+                <img
+                  // eslint-disable-next-line global-require
+                  // eslint-disable-next-line import/no-dynamic-require
+                  src={require(`../../assets/types/small/${type.type.name}.svg`)}
+                  alt="element"
+                />
+              </>
+            ))}
+          </StyledContainerInner>
+        )
+      }
     </StyledContainer>
   );
 };

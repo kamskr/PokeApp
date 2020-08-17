@@ -1,30 +1,26 @@
 /* eslint-disable global-require */
 import React from 'react';
 import styled from 'styled-components';
-import usePostPokemonService from '../hooks/usePostPokemonService';
 import Navbar from '../components/atoms/Navbar';
+import PokemonDisplay from '../components/molecules/PokemonDisplay';
 
 const StyledContainer = styled.div`
   width: 100%;
 `;
 
-const PokemonDisplay: React.FC = () => {
-  const service = usePostPokemonService();
+const PokemonList: React.FC = () => {
+  const rows = [];
+  const numrows = 10;
 
+  // eslint-disable-next-line no-plusplus
+  for (let i = 1; i <= numrows; i++) {
+    rows.push(<PokemonDisplay id={i} />);
+  }
   return (
     <StyledContainer>
       <Navbar text="Pokemon" />
-      {service.status === 'loading' && <div>Loading...</div>}
-      {service.status === 'loaded' &&
-        service.payload.results.map((item, index) => (
-          // eslint-disable-next-line react/no-array-index-key
-          <li key={index}>
-            <span>{item.name}</span>
-          </li>
-        ))}
-
-      {}
+      {rows}
     </StyledContainer>
   );
 };
-export default PokemonDisplay;
+export default PokemonList;
