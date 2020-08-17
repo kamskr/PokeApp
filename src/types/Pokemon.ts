@@ -17,9 +17,21 @@ interface Sprite {
   other: Other;
 }
 
+interface Stat {
+  name: string;
+}
+
+interface Stats {
+  [x: string]: any;
+  base_stat: number;
+  effort: number;
+  stat: Stat;
+}
+
 export interface Pokemon {
   name: string;
   sprites: Sprite;
   types: Types[];
+  stats?: Stats[];
   onPokemonClose?: () => void;
 }

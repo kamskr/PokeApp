@@ -14,7 +14,7 @@ const PokemonList: React.FC = () => {
 
   // eslint-disable-next-line no-plusplus
   for (let i = 1; i <= numrows; i++) {
-    rows.push(<PokemonDisplay id={i} />);
+    rows.push(<PokemonDisplay id={i} key={i} />);
   }
   return (
     <StyledContainer>

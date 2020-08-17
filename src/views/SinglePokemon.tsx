@@ -1,11 +1,17 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable global-require */
 import React from 'react';
 import styled from 'styled-components';
 import ButtonIcon from '../components/atoms/ButtonIcon';
 import { Pokemon } from '../types/Pokemon';
+import StatDisplay from '../components/molecules/StatDisplay';
 
-const StyledContainer = styled.div`
+interface Props {
+  pokemonColor: string;
+}
+
+const StyledContainer = styled.div<Props>`
   position: fixed;
   display: flex;
   flex-direction: column;
@@ -15,7 +21,7 @@ const StyledContainer = styled.div`
   width: 100vw;
   height: 100vh;
   z-index: 9999;
-  background-color: ${({ theme }) => theme.color.water};
+  background-color: ${({ theme, pokemonColor }) => theme.color[pokemonColor]};
 `;
 
 const StyledContainerInner = styled.div`
@@ -30,6 +36,8 @@ const StyledContainerInner = styled.div`
   border-top-left-radius: 60px;
   border-top-right-radius: 60px;
 `;
+
+const StyledContainerStats = styled.div``;
 
 const StyledImage = styled.img`
   width: 50vw;
@@ -50,14 +58,39 @@ const StyledButtonIcon = styled(ButtonIcon)`
   width: 60px;
 `;
 
+const statShortName = {
+  HP: 'hp',
+  ATK: 'attack',
+  DEF: 'defense',
+  SATK: 'special-attack',
+  SDEF: 'special-defense',
+  SPD: 'speed',
+};
+
 const SinglePokemon: React.FC<Pokemon> = ({
   name,
   sprites,
   types,
+  stats,
   onPokemonClose,
 }: Pokemon) => {
+  function getKeyByValue(
+    object: {
+      [x: string]: unknown;
+      HP?: string;
+      ATK?: string;
+      DEF?: string;
+      SATK?: string;
+      SDEF?: string;
+      SPD?: string;
+    },
+    value: string
+  ) {
+    return Object.keys(object).find((key) => object[key] === value);
+  }
+
   return (
-    <StyledContainer>
+    <StyledContainer pokemonColor={types[0].type.name}>
       <StyledButtonIcon
         icon={require('../assets/closeIcon.svg')}
         onClick={onPokemonClose}
@@ -68,14 +101,27 @@ const SinglePokemon: React.FC<Pokemon> = ({
       />
       <StyledContainerInner>
         <StyledName>{name}</StyledName>
-        {types.map((type) => (
+        {types.map((type, index) => (
           <img
             // eslint-disable-next-line global-require
             // eslint-disable-next-line import/no-dynamic-require
-            src={require(`../assets/types/small/${type.type.name}.svg`)}
+            src={require(`../assets/types/big/${type.type.name}.svg`)}
             alt="element"
+            key={index}
           />
         ))}
+        <StyledContainerStats>
+          {stats &&
+            stats.map((stat, index) => (
+              <StatDisplay
+                name={getKeyByValue(statShortName, stat.stat.name)}
+                effort={stat.effort}
+                baseStat={stat.base_stat}
+                color={types[0].type.name}
+                key={index}
+              />
+            ))}
+        </StyledContainerStats>
       </StyledContainerInner>
     </StyledContainer>
   );

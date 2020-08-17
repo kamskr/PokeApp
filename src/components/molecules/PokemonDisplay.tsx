@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable global-require */
 import React, { useState } from 'react';
@@ -43,7 +44,7 @@ const StyledInfoContainer = styled.div`
 
 const PokemonDisplay: React.FC<PokemonId> = (id: PokemonId) => {
   const service = useSinglePokemonService(id);
-  const [singleOpen, setSingleOpen] = useState(false);
+  const [singleOpen, setSingleOpen] = useState(true);
 
   const onPokemonOpen = () => {
     setSingleOpen(true);
@@ -70,15 +71,14 @@ const PokemonDisplay: React.FC<PokemonId> = (id: PokemonId) => {
                   <h2>{service.payload.name}</h2>
                   <span>#{id.id}</span>
                 </StyledInfoContainer>
-                {service.payload.types.map((type) => (
-                  <>
-                    <img
-                      // eslint-disable-next-line global-require
-                      // eslint-disable-next-line import/no-dynamic-require
-                      src={require(`../../assets/types/small/${type.type.name}.svg`)}
-                      alt="element"
-                    />
-                  </>
+                {service.payload.types.map((type, index) => (
+                  <img
+                    // eslint-disable-next-line global-require
+                    // eslint-disable-next-line import/no-dynamic-require
+                    src={require(`../../assets/types/small/${type.type.name}.svg`)}
+                    alt="element"
+                    key={index}
+                  />
                 ))}
               </StyledContainerInner>
               {singleOpen && (
@@ -86,6 +86,7 @@ const PokemonDisplay: React.FC<PokemonId> = (id: PokemonId) => {
                   name={service.payload.name}
                   sprites={service.payload.sprites}
                   types={service.payload.types}
+                  stats={service.payload.stats}
                   onPokemonClose={onPokemonClose}
                 />
               )}
